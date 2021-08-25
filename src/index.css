@@ -1,0 +1,98 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* basic styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;   
+ }
+ 
+ :root{
+     --bgcolor:black;
+     --primarycolor:red;
+        --textcolor:rgb(252, 249, 249);
+        --main-text-color:blue;
+     }
+ 
+     html{
+         font-size: 62.5%;
+     }
+ 
+     a{
+         text-decoration: none;
+         color: white !important ;
+     }
+ 
+     h1,
+     h2,
+     h3,h3,h4,h5,h6{
+        color: #333333; 
+     }
+ 
+     @media (min-width:1500){
+         .container,
+         .container-lg,
+         .container-sm,
+         .container-md,
+         .container-xl,
+         .container-xxl{
+             max-width: 1500px !important;
+         }
+     }
+     @media (min-width:1400){
+         .container,
+         .container-lg,
+         .container-sm,
+         .container-md,
+         .container-xl,
+         .container-xxl{
+             max-width: 1400px !important;
+         }
+     }
+ 
+     /* Nav bar styling  */
+ 
+ 
+     .navbar-bg{
+         background-color: var(--bgcolor);
+         padding: 2rem 0;
+         z-index: 99;
+         position: relative;
+     }
+ 
+     .navbar-brand{
+        font-size: 2.5rem;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+     }
+ 
+     .navbar li{
+         padding: 0  2rem;
+     }
+     .navbar li a{
+       font-size: 1.5rem;
+       font-weight: normal;
+     }
+ 
+     .navbar li a:hover{
+       color:white !important;
+       background-color:var(--primarycolor);
+       border-radius: 10px 30px;   
+      }
+     
+      .navbar-toggler{
+           background-color: white !important;
+      }         
