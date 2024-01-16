@@ -7,11 +7,18 @@ const ticketController = {
         try {
             const { firstName, lastName, email } = req.body;
       
-            // Find the last seat number in use
-            // const lastSeat = await ticketModel.findOne().sort({ seatNumber: -1 });
-      
-            // Calculate the next seat number
-            const nextSeatNumber =  1;
+            const lastSeat = await ticketModel.aggregate([
+                {
+                  $group: {
+                    _id: null,
+                    maxSeatNumber: { $max: "$seatNumber" }
+                  }
+                }
+              ]);
+              
+              // Calculate the next seat number
+              const nextSeatNumber = (lastSeat.length > 0) ? lastSeat[0].maxSeatNumber + 1 : 1;
+              
       
             // Check if the next seat number is within the allowed range (1 to 40)
             if (nextSeatNumber <= 40) {
@@ -40,8 +47,15 @@ const ticketController = {
         },
 
     getAllTickets: async (req, res) => {
-        return res.json({ 'data': "all ticket" })
-        // Implement logic to fetch all tickets
+        try {
+            // Reset all tickets to "open" status and clear user details
+            const result = await ticketModel.find();
+
+            return res.status(200).json({ result: result });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: 'Internal server error.' });
+        }
     },
 
     getClosedTickets: async (req, res) => {
@@ -101,15 +115,8 @@ const ticketController = {
 
     resetServer: async (req, res) => {
         try {
-            // Check if the user is an admin (you might have your own admin authentication logic)
-            const isAdmin = req.headers.authorization === 'admin_token';
-
-            if (!isAdmin) {
-                return res.status(403).json({ message: 'Access forbidden. Only admin can reset the server.' });
-            }
-
             // Reset all tickets to "open" status and clear user details
-            await Ticket.updateMany({}, { $set: { status: 'open', userDetails: {} } });
+            await ticketModel.updateMany({}, { $set: { status: 'open', userDetails: {} } });
 
             return res.status(200).json({ message: 'Server reset successful.' });
         } catch (error) {

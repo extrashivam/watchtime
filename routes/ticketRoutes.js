@@ -12,5 +12,6 @@ router.get('/open', authenticateAdmin, ticketController.getOpenTickets);
 
 router.get('/:ticketId/details', authenticateAdmin, ticketController.viewTicketOwnerDetails);
 router.post('/:ticketId', authenticateAdmin, ticketController.updateTicketStatus);
+router.get('/reset', authenticateAdmin, ticketController.resetServer);
 
 module.exports = router;

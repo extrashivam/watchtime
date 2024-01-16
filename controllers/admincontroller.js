@@ -19,7 +19,7 @@ const adminController = {
           expiresIn: '1h', // Token expires in 1 hour
         });
 
-        return res.status(200).json({token: token });
+        return res.status(200).json({token: token, expiresIn:'1h' });
       } else {
         return res.status(401).json({ message: 'Invalid username or password.' });
       }
